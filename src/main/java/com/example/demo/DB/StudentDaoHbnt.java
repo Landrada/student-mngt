@@ -14,7 +14,8 @@ public class StudentDaoHbnt {
      */
     public void saveStudent(Student student) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
@@ -22,7 +23,7 @@ public class StudentDaoHbnt {
             // commit transaction
             transaction.commit();
 
-            System.out.println(" New student adde using hibernate okey");
+            System.out.println(" New student added using hibernate okey");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -38,7 +39,8 @@ public class StudentDaoHbnt {
      */
     public Long saveBed(Bed bed) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
