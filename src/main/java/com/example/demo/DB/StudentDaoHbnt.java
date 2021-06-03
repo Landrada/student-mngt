@@ -34,8 +34,9 @@ public class StudentDaoHbnt {
      * Save Bed
      *
      * @param bed
+     * @return
      */
-    public void saveBed(Bed bed) {
+    public Long saveBed(Bed bed) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
@@ -52,6 +53,7 @@ public class StudentDaoHbnt {
             }
             e.printStackTrace();
         }
+        return bed.getId();
     }
     /**
      * Update Student
