@@ -1,6 +1,8 @@
 package com.example.demo.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="student")
@@ -11,6 +13,14 @@ public class Student {
         private String firstName;
         private String lastName;
         private String gender;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "student_beds_tbl",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "bed_id")}
+    )
+    private Set<Bed> beds = new HashSet<Bed>();
 
         public Long getId() {
             return id;
