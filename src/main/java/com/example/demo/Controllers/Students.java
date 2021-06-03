@@ -2,7 +2,9 @@ package com.example.demo.Controllers;
 
 import com.example.demo.DB.StudentDao;
 import com.example.demo.DB.StudentDaoHbnt;
+import com.example.demo.models.Bed;
 import com.example.demo.models.Student;
+import com.example.demo.models.enums.BedType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -90,6 +92,8 @@ public class Students extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String gender = request.getParameter("gender");
         Student newStudent = new Student(firstName, lastName, gender);
+        Bed newBed = new Bed("001", BedType.BUNK);
+        studentDaoHbnt.saveBed(newBed);
         //studentDao.insertStudent(newStudent);
         studentDaoHbnt.saveStudent(newStudent);
         response.sendRedirect("list");

@@ -23,6 +23,10 @@ import java.util.Set;
             Type = type;
             this.student = student;
         }
+        public Bed(String number, BedType bunk){
+            this.number = number;
+            Type = bunk;
+        }
         public Long getId() {
             return id;
         }

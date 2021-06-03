@@ -1,5 +1,7 @@
 package com.example.demo.DB;
 import java.util.List;
+
+import com.example.demo.models.Bed;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.example.demo.models.Student;
@@ -21,6 +23,29 @@ public class StudentDaoHbnt {
             transaction.commit();
 
             System.out.println(" New student adde using hibernate okey");
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Save Bed
+     *
+     * @param bed
+     */
+    public void saveBed(Bed bed) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // start a transaction
+            transaction = session.beginTransaction();
+            // save the student object
+            session.save(bed);
+            // commit transaction
+            transaction.commit();
+
+            System.out.println(" New bed added using hibernate okey");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
