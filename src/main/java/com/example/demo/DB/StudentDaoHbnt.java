@@ -14,8 +14,8 @@ public class StudentDaoHbnt {
      */
     public void saveStudent(Student student) {
         Transaction transaction = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()){
+
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
