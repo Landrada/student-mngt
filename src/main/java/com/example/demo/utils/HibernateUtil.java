@@ -1,5 +1,8 @@
 package com.example.demo.utils;
 
+import com.example.demo.models.Bed;
+import com.example.demo.models.Course;
+import com.example.demo.models.CourseAssignment;
 import com.example.demo.models.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -19,25 +22,29 @@ public class HibernateUtil {
 
 	public static SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
+
 			try {
 				Configuration configuration = new Configuration();
 
 				// Hibernate settings equivalent to hibernate.cfg.xml's properties
 				Properties settings = new Properties();
 				settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-				settings.put(Environment.URL, "jdbc:mysql://localhost:3306/school_man_db?characterEncoding=utf8");
+				settings.put(Environment.URL, "jdbc:mysql://localhost:3306/hibernate?characterEncoding=utf8");
 				settings.put(Environment.USER, "root");
-				settings.put(Environment.PASS, "BAG#bag4");
+				settings.put(Environment.PASS, "123elocin");
 				settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
 
 				settings.put(Environment.SHOW_SQL, "true");
 
 				settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-				settings.put(Environment.HBM2DDL_AUTO, "update");
+				settings.put(Environment.HBM2DDL_AUTO, "create-drop");
 
 				configuration.setProperties(settings);
 				configuration.addAnnotatedClass(Student.class);
+				configuration.addAnnotatedClass(Bed.class);
+				configuration.addAnnotatedClass(CourseAssignment.class);
+				configuration.addAnnotatedClass(Course.class);
 
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 						.applySettings(configuration.getProperties()).build();
@@ -49,6 +56,7 @@ public class HibernateUtil {
 				e.printStackTrace();
 			}
 		}
+
 		return sessionFactory;
 	}
 }

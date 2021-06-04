@@ -2,7 +2,9 @@ package com.example.demo.Controllers;
 
 import com.example.demo.DB.StudentDao;
 import com.example.demo.DB.StudentDaoHbnt;
+import com.example.demo.models.Bed;
 import com.example.demo.models.Student;
+import com.example.demo.models.enums.BedType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Servlet implementation class Students
@@ -90,8 +94,15 @@ public class Students extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String gender = request.getParameter("gender");
         Student newStudent = new Student(firstName, lastName, gender);
+        Bed newBed = new Bed("001", BedType.BUNK);
         //studentDao.insertStudent(newStudent);
+        Long bedId = studentDaoHbnt.saveBed(newBed);
+        newBed.setId(bedId);
+        Set<Bed> beds = new HashSet<Bed>();
+        beds.add(newBed);
+        newStudent.setBed(beds);
         studentDaoHbnt.saveStudent(newStudent);
+        System.out.println(newStudent.getFirstName()+" "+newStudent.getLastName()+" "+newStudent.getGender());
         response.sendRedirect("list");
     }
     private void updateStudent(HttpServletRequest request, HttpServletResponse response)
