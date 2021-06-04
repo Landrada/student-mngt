@@ -3,6 +3,8 @@ package com.example.demo.models;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -15,6 +17,12 @@ public class Course implements Serializable {
     private int id;
     private String Title;
     private Long numHours;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private Set<CourseAssignment> courses = new HashSet<>();
+    private Student student;
+
+
     public Course(){}
     public Course(int id, String title, Long numHours) {
         this.id = id;
