@@ -22,6 +22,11 @@ public class Student {
     )
     private Set<Bed> beds = new HashSet<Bed>();
 
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private Set<CourseAssignment> courses = new HashSet<>();
+
+
+
         public Long getId() {
             return id;
         }
@@ -71,4 +76,7 @@ public class Student {
             this.lastName = lastName;
         }
 
+    public void setBed(Set<Bed> beds) {
+            this.beds = beds;
+    }
 }

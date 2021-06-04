@@ -19,7 +19,7 @@ public class HibernateUtil {
 
 	public static SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
-			System.out.println("Wo a nyiii");
+
 			try {
 				Configuration configuration = new Configuration();
 
@@ -50,6 +50,7 @@ public class HibernateUtil {
 				e.printStackTrace();
 			}
 		}
+
 		return sessionFactory;
 	}
 }
